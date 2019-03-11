@@ -290,4 +290,34 @@ func sortArrayByParityII(_ A: [Int]) -> [Int] {
     return arr2
 }
 
+// MARK: 985. 查询后的偶数和
+
+func sumEvenAfterQueries(_ A: [Int], _ queries: [[Int]]) -> [Int] {
+    var tmpArr = A
+    var sunArr = [Int]()
+    var sum = 0
+    for item in tmpArr {
+        sum += item % 2 == 0 ? item : 0
+    }
+    
+    for i in 0..<queries.count {
+        let val = queries[i][0]
+        let index = queries[i][1]
+        if tmpArr[index] % 2 == 0 {
+            sum -= tmpArr[index]
+        }
+        tmpArr[index] += val
+        if tmpArr[index] % 2 == 0 {
+            sum += tmpArr[index]
+        }
+        sunArr.append(sum)
+    }
+    
+    return sunArr
+}
+
+//debugPrint(sumEvenAfterQueries([1,2,3,4], [[1,0],[-3,1],[-4,0],[2,3]]))
+
+
+
 
