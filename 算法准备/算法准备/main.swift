@@ -318,6 +318,33 @@ func sumEvenAfterQueries(_ A: [Int], _ queries: [[Int]]) -> [Int] {
 
 //debugPrint(sumEvenAfterQueries([1,2,3,4], [[1,0],[-3,1],[-4,0],[2,3]]))
 
+// MARK: 509. 斐波那契数
+
+//func fib(_ N: Int) -> Int {
+//    while N >= 2 {
+//        return fib(N - 1) + fib(N - 2)
+//    }
+//    return N
+//}
+
+func fib(_ N: Int) -> Int {
+    if N < 2 {
+        return N
+    }
+    var start = 2
+    var first = 0
+    var second = 1
+    var sum = 0
+    while start <= N {
+        sum = first + second
+        first = second
+        second = sum
+        start += 1
+    }
+    return sum
+}
+
+//debugPrint(fib(4))
 
 
 
