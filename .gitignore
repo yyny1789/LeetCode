@@ -54,3 +54,4 @@ fastlane/test_output
 
 # meta files
 fastlane/metadata
+*.xcuserstate
