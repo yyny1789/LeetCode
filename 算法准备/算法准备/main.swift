@@ -346,5 +346,94 @@ func fib(_ N: Int) -> Int {
 
 //debugPrint(fib(4))
 
+// MARK: 561. 数组拆分 I
+func arrayPairSum(_ nums: [Int]) -> Int {
+    let tmpArr = nums.sorted()
+    var sum = 0
+    var i = 0
+    while i < nums.count {
+        sum += tmpArr[i]
+        i += 2
+    }
+    return sum
+}
 
+//debugPrint(arrayPairSum([1,4,3,2]))
+
+// MARK: 15. 三数之和
+
+func threeSum(_ nums: [Int]) -> [[Int]] {
+    var set = Set<[Int]>()
+    var array = [[Int]]()
+    
+    if nums.count < 3 { return array }
+    
+    for i in 0..<nums.count - 2 {
+        for j in (i + 1)..<nums.count - 1 {
+            for k in (i + 2)..<nums.count {
+                if nums[i] + nums[j] + nums[k] == 0 {
+                    set.insert([nums[i], nums[j], nums[k]])
+                }
+            }
+        }
+    }
+    set.forEach { (item) in
+        array.append(item)
+    }
+    return array
+}
+
+//debugPrint(threeSum([-1, 0, 1, 2, -1, -4]))
+
+// MARK: 至少是其他数字两倍的最大数
+
+func dominantIndex(_ nums: [Int]) -> Int {
+    if nums.count == 1 { return 0 }
+    var dic = [Int: Int]()
+    for i in 0..<nums.count {
+        dic[nums[i]] = i
+    }
+    var array = nums.sorted()
+    
+    let last = array[nums.count - 1]
+    let second = array[nums.count - 2]
+    if second == 0 {
+        return dic[last] ?? -1
+    } else {
+        if last / second >= 2 {
+            return dic[last] ?? -1
+        } else {
+            return -1
+        }
+    }
+}
+
+// MARK: 加一
+
+func plusOne(_ digits: [Int]) -> [Int] {
+    var arr = digits
+    var index = arr.count - 1
+    var next = 0
+    while index >= 0 {
+        var num = arr[index]
+        if index == arr.count - 1 {
+            num += 1
+        } else {
+            num += next
+            next = 0
+        }
+        if num >= 10 {
+            num -= 10
+            next = 1
+        }
+        arr[index] = num
+        index -= 1
+    }
+    if next == 1 {
+        arr.insert(1, at: 0)
+    }
+    return arr
+}
+
+//debugPrint(plusOne([9, 9, 9]))
 
