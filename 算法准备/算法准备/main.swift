@@ -437,3 +437,78 @@ func plusOne(_ digits: [Int]) -> [Int] {
 
 //debugPrint(plusOne([9, 9, 9]))
 
+// MARK: 498. 对角线遍历
+
+//func findDiagonalOrder(_ matrix: [[Int]]) -> [Int] {
+//    var array = [Int]()
+//    if matrix.count == 0 {
+//        return array
+//    }
+//    let M = matrix.count
+//    let N = matrix[0].count
+//    let maxCount = M + N - 2
+//    var i = 0
+//
+//    while i <= maxCount {
+//        if i % 2 == 0 {
+//            for j in 0..<N {
+//                if i - j >= 0 && i - j < M {
+//                    array.append(matrix[i - j][j])
+//                }
+//            }
+//        } else {
+//            for j in 0..<M {
+//                if i - j >= 0 && i - j < N {
+//                    array.append(matrix[j][i - j])
+//                }
+//            }
+//        }
+//        i += 1
+//    }
+//
+//    return array
+//}
+
+func findDiagonalOrder(_ matrix: [[Int]]) -> [Int] {
+    var array = [Int]()
+    if matrix.count == 0 {
+        return array
+    }
+    let row = matrix.count
+    let col = matrix[0].count
+    var r = 0
+    var c = 0
+    
+    for i in 0..<row*col {
+        array.append(matrix[r][c])
+        if (r + c) % 2 == 0 {
+            if c == col - 1 {
+                // 往右移动一格准备向下遍历
+                r += 1
+            } else if r == 0 {
+                // 往下移动一格准备向下遍历
+                c += 1
+            } else {
+                // 往上移动
+                r -= 1
+                c += 1
+            }
+        } else {
+            if r == row - 1 {
+                // 往右移动一格准备向上遍历
+                c += 1
+            } else if c == 0 {
+                // 往上移动一格准备向上遍历
+                r += 1
+            } else {
+                // 往下移动
+                r += 1
+                c -= 1
+            }
+        }
+    }
+    
+    return array
+}
+
+//debugPrint(findDiagonalOrder([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
