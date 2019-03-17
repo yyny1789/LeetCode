@@ -512,3 +512,53 @@ func findDiagonalOrder(_ matrix: [[Int]]) -> [Int] {
 }
 
 //debugPrint(findDiagonalOrder([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+// MARK: 54. 螺旋矩阵
+func spiralOrder(_ matrix: [[Int]]) -> [Int] {
+    var array = [Int]()
+    if matrix.count == 0 {
+        return array
+    }
+    let row = matrix.count
+    let col = matrix[0].count
+    var r = 0
+    var c = 0
+    var x = 1
+    
+    for i in 0..<row*col {
+//        array.append(matrix[r][c])
+        debugPrint(r,c)
+        //0,0  0,col-1 row-1,col-1, row-1,0
+        if r == x - 1 && c <= col - x {
+            c += 1
+        } else if r > x - 1 && c == col - x {
+            r += 1
+        } else if r == row - x && c < col - x {
+            c -= 1
+        } else if r < row - x && c == x - 1 {
+            r -= 1
+        }
+        
+        if c > col - x {
+            c -= 1
+            r += 1
+        }
+        if r > row - x {
+            r -= 1
+            c -= 1
+        }
+        if c < x - 1 {
+            c += 1
+            r -= 1
+        }
+        
+        if r == c && r == x - 1 {
+            c += 1
+            r += 1
+            x += 1
+        }
+    }
+    return array
+}
+
+debugPrint(spiralOrder([[2,5],[8,4],[0,-1]]))
