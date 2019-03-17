@@ -561,4 +561,38 @@ func spiralOrder(_ matrix: [[Int]]) -> [Int] {
     return array
 }
 
-debugPrint(spiralOrder([[2,5],[8,4],[0,-1]]))
+//debugPrint(spiralOrder([[2,5],[8,4],[0,-1]]))
+
+// MARK: 118. 杨辉三角
+
+func generate(_ numRows: Int) -> [[Int]] {
+    var arr = [[Int]]()
+    var lastArr = [Int]()
+
+    for i in 0..<numRows {
+        var tmpArr = [Int]()
+        for j in 0..<i + 1{
+            if lastArr.count == 0 {
+                tmpArr.append(1)
+            } else {
+                var x = 0
+                if j - 1 >= 0 {
+                    x += lastArr[j - 1]
+                }
+                if j < lastArr.count {
+                    x += lastArr[j]
+                }
+                if x == 0 {
+                    x = 1
+                }
+                tmpArr.append(x)
+            }
+        }
+        lastArr = tmpArr
+        arr.append(lastArr)
+    }
+    
+    return arr
+}
+
+//debugPrint(generate(4))
