@@ -596,3 +596,39 @@ func generate(_ numRows: Int) -> [[Int]] {
 }
 
 //debugPrint(generate(4))
+
+// MARK: 67. 二进制求和
+func addBinary(_ a: String, _ b: String) -> String {
+    let count = max(a.count, b.count)
+    var tmpStr = ""
+    var last = 0
+    
+    for i in 0..<count {
+        var sum = last
+        if a.count - 1 - i >= 0 {
+            let index = a.index(a.startIndex, offsetBy: a.count - 1 - i)
+            if let subA = Int(String(a[index])) {
+                sum += subA
+            }
+        }
+        if b.count - 1 - i >= 0 {
+            let index = b.index(b.startIndex, offsetBy: b.count - 1 - i)
+            if let subB = Int(String(b[index])) {
+                sum += subB
+            }
+        }
+        last = sum / 2
+        if let char = "\(sum % 2)".first {
+            tmpStr.insert(char, at: tmpStr.startIndex)
+        }
+    }
+    if last > 0 {
+        if let char = "\(last)".first {
+            tmpStr.insert(char, at: tmpStr.startIndex)
+        }
+    }
+    
+    return tmpStr
+}
+
+debugPrint(addBinary("1010", "1011"))
