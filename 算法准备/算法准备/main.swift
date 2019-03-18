@@ -712,3 +712,50 @@ func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
 //var nums = [3,2,2,3]
 //
 //debugPrint(removeElement(&nums, 3), nums)
+
+// MARK: 485. 最大连续1的个数
+
+//func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
+//    let length = nums.count
+//    var maxCount = 0
+//    var index = 0
+//
+//    while index < length {
+//        if nums[index] == 1 {
+//            var nextIndex = index
+//            for i in (index + 1)..<length {
+//                if nums[i] == 1 {
+//                    nextIndex = i
+//                } else {
+//                    break
+//                }
+//            }
+//            maxCount = max(maxCount, nextIndex - index + 1)
+//            index = nextIndex + 1
+//        } else {
+//            index += 1
+//        }
+//    }
+//
+//    return maxCount
+//}
+
+func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
+    var count = 0
+    var max = 0
+    for i in 0..<nums.count {
+        if nums[i] == 1 {
+            count += 1
+        } else {
+            count = 0
+        }
+        
+        if count > max {
+            max = count
+        }
+    }
+    return max
+}
+
+
+debugPrint(findMaxConsecutiveOnes([1,0]))
