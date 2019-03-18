@@ -659,4 +659,22 @@ func longestCommonPrefix(_ strs: [String]) -> String {
     return prefix
 }
 
-debugPrint(longestCommonPrefix(["flower","flow","floght"]))
+//debugPrint(longestCommonPrefix(["flower","flow","floght"]))
+
+// MARK: 344. 反转字符串
+
+func reverseString(_ s: inout [Character]) {
+    if s.isEmpty { return }
+    var i = 0
+    while i < s.count / 2 {
+        let pre = s[i]
+        s[i] = s[s.count - 1 - i]
+        s[s.count - 1 - i] = pre
+        i += 1
+    }
+}
+
+//var characterArr: [Character] = ["A","P", "a", "n", "a", "m"]
+//reverseString(&characterArr)
+//
+//debugPrint(characterArr)
