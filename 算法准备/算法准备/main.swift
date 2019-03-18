@@ -695,3 +695,25 @@ func twoSum2(_ numbers: [Int], _ target: Int) -> [Int] {
 }
 
 //debugPrint(twoSum2([2, 7, 11, 15], 13))
+
+// MARK: 27. 移除元素
+
+func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
+    var k = 0
+    var count = nums.count
+    for i in 0..<count {
+        if nums[i] != val {
+            nums[k] = nums[i]
+            k += 1
+        }
+    }
+    while count - k > 0 {
+        nums.removeLast()
+        count -= 1
+    }
+    return k
+}
+
+//var nums = [3,2,2,3]
+//
+//debugPrint(removeElement(&nums, 3), nums)
