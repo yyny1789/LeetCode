@@ -678,3 +678,20 @@ func reverseString(_ s: inout [Character]) {
 //reverseString(&characterArr)
 //
 //debugPrint(characterArr)
+
+// MARK: 167. 两数之和 II - 输入有序数组
+
+func twoSum2(_ numbers: [Int], _ target: Int) -> [Int] {
+    var dic = [Int: Int]()
+    var arr = [Int]()
+    for i in 0..<numbers.count {
+        if let index = dic[target - numbers[i]] {
+            arr = i > index ? [index + 1, i + 1] : [i + 1, index + 1]
+            break
+        }
+        dic[numbers[i]] = i
+    }
+    return arr
+}
+
+//debugPrint(twoSum2([2, 7, 11, 15], 13))
