@@ -631,4 +631,32 @@ func addBinary(_ a: String, _ b: String) -> String {
     return tmpStr
 }
 
-debugPrint(addBinary("1010", "1011"))
+//debugPrint(addBinary("1010", "1011"))
+
+// MARK: 14. 最长公共前缀
+func longestCommonPrefix(_ strs: [String]) -> String {
+    var prefix = ""
+    var flag = true
+    var index = 0
+    while flag {
+        if let firstStr = strs.first, firstStr.count > 0 && index < firstStr.count {
+            let tmpPrefix = prefix + String(firstStr[firstStr.index(firstStr.startIndex, offsetBy: index)])
+            for i in 1..<strs.count {
+                if !strs[i].hasPrefix(tmpPrefix) {
+                    flag = false
+                    break
+                }
+            }
+            if flag {
+                index += 1
+                prefix = tmpPrefix
+            }
+        } else {
+            flag = false
+        }
+    }
+    
+    return prefix
+}
+
+debugPrint(longestCommonPrefix(["flower","flow","floght"]))
