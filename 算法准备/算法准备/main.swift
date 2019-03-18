@@ -700,16 +700,11 @@ func twoSum2(_ numbers: [Int], _ target: Int) -> [Int] {
 
 func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
     var k = 0
-    var count = nums.count
-    for i in 0..<count {
+    for i in 0..<nums.count {
         if nums[i] != val {
             nums[k] = nums[i]
             k += 1
         }
-    }
-    while count - k > 0 {
-        nums.removeLast()
-        count -= 1
     }
     return k
 }
