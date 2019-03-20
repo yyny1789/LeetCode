@@ -805,4 +805,19 @@ func minSubArrayLen(_ s: Int, _ nums: [Int]) -> Int {
     return res == -1 ? 0 : res
 }
 
-debugPrint(minSubArrayLen(7, [1,1,1,1,1,2]))
+//debugPrint(minSubArrayLen(7, [1,1,1,1,1,2]))
+
+// MARK: 189. 旋转数组
+
+func rotate(_ nums: inout [Int], _ k: Int) {
+    if nums.count == 0 { return }
+    var j = k > nums.count ? k - nums.count : k
+    while j > 0 {
+        nums.insert(nums.last ?? nums[0], at: 0)
+        nums.removeLast()
+        j -= 1
+    }
+}
+
+//var nums = [-1,-100,3,99]
+//debugPrint(rotate(&nums, 5), nums)
