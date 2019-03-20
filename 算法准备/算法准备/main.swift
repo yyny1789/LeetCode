@@ -318,7 +318,7 @@ func sumEvenAfterQueries(_ A: [Int], _ queries: [[Int]]) -> [Int] {
 
 //debugPrint(sumEvenAfterQueries([1,2,3,4], [[1,0],[-3,1],[-4,0],[2,3]]))
 
-// MARK: 509. 斐波那契数
+// MARK: ❤️ 509. 斐波那契数
 
 //func fib(_ N: Int) -> Int {
 //    while N >= 2 {
@@ -360,7 +360,7 @@ func arrayPairSum(_ nums: [Int]) -> Int {
 
 //debugPrint(arrayPairSum([1,4,3,2]))
 
-// MARK: 15. 三数之和
+// MARK: ❤️ 15. 三数之和
 
 func threeSum(_ nums: [Int]) -> [[Int]] {
     var set = Set<[Int]>()
@@ -437,7 +437,7 @@ func plusOne(_ digits: [Int]) -> [Int] {
 
 //debugPrint(plusOne([9, 9, 9]))
 
-// MARK: 498. 对角线遍历
+// MARK: ❤️ 498. 对角线遍历
 
 //func findDiagonalOrder(_ matrix: [[Int]]) -> [Int] {
 //    var array = [Int]()
@@ -713,7 +713,7 @@ func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
 //
 //debugPrint(removeElement(&nums, 3), nums)
 
-// MARK: 485. 最大连续1的个数
+// MARK: ❤️ 485. 最大连续1的个数
 
 //func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
 //    let length = nums.count
@@ -757,5 +757,52 @@ func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
     return max
 }
 
+//debugPrint(findMaxConsecutiveOnes([1,0]))
 
-debugPrint(findMaxConsecutiveOnes([1,0]))
+// MARK: ❤️ 209. 长度最小的子数组
+
+//func minSubArrayLen(_ s: Int, _ nums: [Int]) -> Int {
+//    var minLength = 0
+//
+//    for i in 0..<nums.count {
+//        var sum = nums[i]
+//        var count = 1
+//        var j = i + 1
+//        while j < nums.count && sum < s {
+//            sum += nums[j]
+//            j += 1
+//            count += 1
+//        }
+//        if sum >= s {
+//            minLength = minLength == 0 ? count : min(count, minLength)
+//        }
+//    }
+//    return minLength
+//}
+
+// 滑块做法
+func minSubArrayLen(_ s: Int, _ nums: [Int]) -> Int {
+    if nums.count == 0 { return 0 }
+    
+    var l = 0
+    var r = 0
+    var sum = nums[0]
+    var res = -1
+    
+    while l < nums.count {
+        if sum < s {
+            if r + 1 >= nums.count {
+                break
+            }
+            r += 1
+            sum += nums[r]
+        } else {
+            res = min(res, r - l + 1)
+            sum -= nums[l]
+            l += 1
+        }
+    }
+    return res == -1 ? 0 : res
+}
+
+debugPrint(minSubArrayLen(7, [1,1,1,1,1,2]))
