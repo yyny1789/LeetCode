@@ -852,4 +852,25 @@ func getRow(_ rowIndex: Int) -> [Int] {
     return lastArr
 }
 
-debugPrint(getRow(3))
+//debugPrint(getRow(3))
+
+// MARK: 151. 翻转字符串里的单词
+
+func reverseWords(_ s: String) -> String {
+    var arr = s.split(separator: " ")
+    var tmpStr = ""
+    while !arr.isEmpty {
+        if let str = arr.last {
+            if tmpStr != "" {
+                tmpStr += " "
+            }
+            tmpStr += str
+            arr.removeLast()
+        }
+    }
+    return tmpStr
+}
+
+//debugPrint(reverseWords("a good   example"))
+
+
