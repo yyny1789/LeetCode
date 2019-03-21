@@ -873,4 +873,25 @@ func reverseWords(_ s: String) -> String {
 
 //debugPrint(reverseWords("a good   example"))
 
+// MARK: 557. 反转字符串中的单词 III
+
+func reverseWords2(_ s: String) -> String {
+    let tmpS = s as NSString
+    var arr = tmpS.components(separatedBy: " ")
+    for (index, var subS) in arr.enumerated() {
+        var count = subS.count
+        var newS = ""
+        while count > 0 {
+            newS.append(subS.removeLast())
+            count -= 1
+        }
+        arr[index] = newS
+    }
+    return arr.joined(separator: " ")
+}
+
+//debugPrint(reverseWords2(""))
+
+
+
 
