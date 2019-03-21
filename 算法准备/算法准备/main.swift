@@ -913,6 +913,27 @@ func removeDuplicates(_ nums: inout [Int]) -> Int {
 //
 //debugPrint(removeDuplicates(&nums), nums)
 
+// MARK: 283. 移动零
+
+func moveZeroes(_ nums: inout [Int]) {
+    var k = nums.count
+    var j = 0
+    while k > 0 {
+        if nums[j] == 0 {
+            nums.append(nums[j])
+            nums.remove(at: j)
+            k -= 1
+        } else {
+            j += 1
+            k -= 1
+        }
+    }
+}
+
+//var nums = [1,1,0,0,12]
+//moveZeroes(&nums)
+//debugPrint(nums)
+
 
 
 
