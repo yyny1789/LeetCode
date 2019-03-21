@@ -892,6 +892,28 @@ func reverseWords2(_ s: String) -> String {
 
 //debugPrint(reverseWords2(""))
 
+// MARK: 26. 删除排序数组中的重复项
+
+func removeDuplicates(_ nums: inout [Int]) -> Int {
+    var tmpN: Int? = nil
+    var k = 0
+    for i in 0..<nums.count {
+        if let n = tmpN, nums[i] == n {
+            
+        } else {
+            tmpN = nums[i]
+            nums[k] = nums[i]
+            k += 1
+        }
+    }
+    return k
+}
+
+//var nums = [0,0,1,1,1,2,2,3,3,4]
+//
+//debugPrint(removeDuplicates(&nums), nums)
+
+
 
 
 
