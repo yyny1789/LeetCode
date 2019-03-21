@@ -821,3 +821,35 @@ func rotate(_ nums: inout [Int], _ k: Int) {
 
 //var nums = [-1,-100,3,99]
 //debugPrint(rotate(&nums, 5), nums)
+
+// MARK: 119. 杨辉三角 II
+
+func getRow(_ rowIndex: Int) -> [Int] {
+    var lastArr = [Int]()
+    
+    for i in 0..<rowIndex + 1 {
+        var tmpArr = [Int]()
+        for j in 0..<i + 1{
+            if lastArr.count == 0 {
+                tmpArr.append(1)
+            } else {
+                var x = 0
+                if j - 1 >= 0 {
+                    x += lastArr[j - 1]
+                }
+                if j < lastArr.count {
+                    x += lastArr[j]
+                }
+                if x == 0 {
+                    x = 1
+                }
+                tmpArr.append(x)
+            }
+        }
+        lastArr = tmpArr
+    }
+    
+    return lastArr
+}
+
+debugPrint(getRow(3))
