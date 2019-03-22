@@ -934,7 +934,114 @@ func moveZeroes(_ nums: inout [Int]) {
 //moveZeroes(&nums)
 //debugPrint(nums)
 
+// MARK: - 链表
 
+// MARK: ❤️ 707. 设计链表
+
+class MyLinkedList {
+    
+    var val: Int?
+    var next: MyLinkedList?
+    
+    /** Initialize your data structure here. */
+    init() {
+        
+    }
+    
+    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    func get(_ index: Int) -> Int {
+        var tmpIndex = index
+        var res: MyLinkedList? = self
+        
+        while tmpIndex > 0 {
+            res = res?.next
+            tmpIndex -= 1
+        }
+        return res?.val ?? -1
+    }
+    
+    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    func addAtHead(_ val: Int) {
+        if let v = self.val {
+            let head = MyLinkedList() // 此处是指针引用，不能用 head = self
+            head.val = v
+            head.next = self.next
+            
+            self.val = val
+            self.next = head
+        } else {
+            self.val = val
+        }
+    }
+    
+    /** Append a node of value val to the last element of the linked list. */
+    func addAtTail(_ val: Int) {
+        if let _ = self.val {
+            var next: MyLinkedList? = self
+            while next?.next != nil {
+                next = next?.next
+            }
+            let tail = MyLinkedList()
+            tail.val = val
+            
+            next?.next = tail
+        } else {
+            self.val = val
+        }
+    }
+    
+    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+    func addAtIndex(_ index: Int, _ val: Int) {
+        if index == 0 { // 需要判断 index == 0 的情况
+            addAtHead(val)
+            return
+        }
+        var tmpIndex = index - 1
+        var res: MyLinkedList? = self
+        
+        while tmpIndex > 0 {
+            res = res?.next
+            tmpIndex -= 1
+        }
+        let tail = MyLinkedList()
+        tail.val = val
+        tail.next = res?.next
+        
+        if let _ = res?.val {
+            res?.next = tail
+        }
+    }
+    
+    /** Delete the index-th node in the linked list, if the index is valid. */
+    func deleteAtIndex(_ index: Int) {
+        var tmpIndex = index
+        var pre: MyLinkedList?
+        var res: MyLinkedList? = self
+        
+        while tmpIndex > 0 {
+            if tmpIndex == 1 {
+                pre = res
+            }
+            res = res?.next
+            tmpIndex -= 1
+        }
+        
+        pre?.next = res?.next
+    }
+}
+
+//let obj = MyLinkedList()
+//obj.addAtHead(0)
+//obj.addAtIndex(1, 9)
+//obj.addAtIndex(1, 5)
+//obj.addAtTail(7)
+//obj.addAtHead(1)
+//obj.addAtIndex(5, 8)
+//obj.addAtIndex(5, 2)
+//obj.addAtIndex(3, 0)
+//obj.addAtTail(1)
+//obj.addAtTail(0)
+//obj.deleteAtIndex(6)
 
 
 
