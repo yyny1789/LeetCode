@@ -1044,4 +1044,61 @@ class MyLinkedList {
 //obj.deleteAtIndex(6)
 
 
+// MARK: 19. 删除链表的倒数第N个节点
+//func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
+//    var count = 0
+//    var newHead = head
+//    while newHead != nil {
+//        count += 1
+//        newHead = newHead!.next
+//    }
+//    var index = count - n
+//    if index == 0 {
+//        return head?.next
+//    }
+//    var pre = head
+//    var cur = head
+//
+//    while index > 0  {
+//        pre = cur
+//        cur = cur?.next
+//        index -= 1
+//    }
+//
+//    pre?.next = cur?.next
+//    return head
+//}
 
+// 使用双指针方法
+func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
+    var fast = 0
+    var fastNode = head
+    var slowNode = head
+    while fast < n {
+        fastNode = fastNode?.next
+        fast += 1
+    }
+    while fastNode != nil && fastNode?.next != nil {
+        fastNode = fastNode?.next
+        slowNode = slowNode?.next
+    }
+    if fastNode == nil {
+        return head?.next
+    } else {
+        slowNode?.next = slowNode?.next?.next
+        return head
+    }
+}
+
+//var head = ListNode(1)
+//var head1 = ListNode(2)
+//var head2 = ListNode(3)
+//var head3 = ListNode(4)
+//var head4 = ListNode(5)
+//head.next = head1
+//head1.next = head2
+//head2.next = head3
+//head3.next = head4
+//
+//let newHead = removeNthFromEnd(head, 2)
+//debugPrint(newHead)
