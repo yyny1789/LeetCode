@@ -1120,3 +1120,28 @@ func reverseList(_ head: ListNode?) -> ListNode? {
 
 //let newHead = reverseList(head)
 //debugPrint(newHead)
+
+// MARK: 203. 移除链表元素
+
+func removeElements(_ head: ListNode?, _ val: Int) -> ListNode? {
+    var newHead = head
+    var pre: ListNode?
+    var cur = newHead
+    while cur != nil {
+        if cur!.val == val {
+            cur = cur?.next
+            if pre == nil {
+                newHead = cur
+            } else {
+                pre?.next = cur
+            }
+        } else {
+            pre = cur
+            cur = cur?.next
+        }
+    }
+    return newHead
+}
+
+//let newHead = removeElements(head, 5)
+//debugPrint(newHead)
