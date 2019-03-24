@@ -1102,3 +1102,21 @@ func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
 //
 //let newHead = removeNthFromEnd(head, 2)
 //debugPrint(newHead)
+
+// MARK: 206. 反转链表
+
+func reverseList(_ head: ListNode?) -> ListNode? {
+    var newHead = head
+    let first = head
+    var next = first?.next
+    while next != nil {
+        first?.next = next?.next
+        next?.next = newHead
+        newHead = next
+        next = first?.next
+    }
+    return newHead
+}
+
+//let newHead = reverseList(head)
+//debugPrint(newHead)
