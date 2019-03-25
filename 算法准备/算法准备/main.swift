@@ -1090,15 +1090,15 @@ func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
     }
 }
 
-var head = ListNode(1)
-var head1 = ListNode(2)
-var head2 = ListNode(3)
-var head3 = ListNode(4)
-var head4 = ListNode(5)
-head.next = head1
-head1.next = head2
-head2.next = head3
-head3.next = head4
+//var head = ListNode(1)
+//var head1 = ListNode(2)
+//var head2 = ListNode(3)
+//var head3 = ListNode(4)
+//var head4 = ListNode(5)
+//head.next = head1
+//head1.next = head2
+//head2.next = head3
+//head3.next = head4
 //
 //let newHead = removeNthFromEnd(head, 2)
 //debugPrint(newHead)
@@ -1185,3 +1185,51 @@ func oddEvenList(_ head: ListNode?) -> ListNode? {
 
 //let newHead = oddEvenList(head)
 //debugPrint(newHead)
+
+
+// MARK: ❤️ 234. 回文链表
+
+func isPalindrome(_ head: ListNode?) -> Bool {
+    var arr = [Int]()
+    var cur = head
+    while cur != nil {
+        arr.append(cur!.val)
+        cur = cur?.next
+    }
+    var left = 0
+    var right = arr.count - 1
+
+    while left < right {
+        if arr[left] == arr[right] {
+            left += 1
+            right -= 1
+        } else {
+            return false
+        }
+    }
+    return true
+}
+
+// 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
+// 要实现 O(n) 的时间复杂度和 O(1) 的空间复杂度，需要翻转后半部分
+// 根据快慢指针，找到链表的中点
+//func isPalindrome(_ head: ListNode?) -> Bool {
+//    // todo
+//    return true
+//}
+
+// 1   true
+// 1 2 false
+// 1 0 1 true
+// 1 1 1 true
+// 1 1 0 false
+// 1 1 1 1 true
+// 1 2 2 2 2 1 true
+
+//var head = ListNode(1)
+//var head2 = ListNode(1)
+//var head3 = ListNode(0)
+//head.next = head2
+//head2.next = head3
+//
+//debugPrint(isPalindrome(head))
