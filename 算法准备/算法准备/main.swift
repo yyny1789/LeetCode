@@ -1233,3 +1233,72 @@ func isPalindrome(_ head: ListNode?) -> Bool {
 //head2.next = head3
 //
 //debugPrint(isPalindrome(head))
+
+// MARK: 21. 合并两个有序链表
+
+func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+    var newL: ListNode?
+    var newCur: ListNode?
+    var tmpL1 = l1
+    var tmpL2 = l2
+    
+    while tmpL1 != nil && tmpL2 != nil {
+        if tmpL1!.val < tmpL2!.val {
+            if newL != nil {
+                newCur?.next = tmpL1
+                newCur = tmpL1
+            } else {
+                newL = tmpL1
+                newCur = tmpL1
+            }
+            tmpL1 = tmpL1?.next
+        } else {
+            if newL != nil {
+                newCur?.next = tmpL2
+                newCur = tmpL2
+            } else {
+                newL = tmpL2
+                newCur = tmpL2
+            }
+            tmpL2 = tmpL2?.next
+        }
+    }
+    newCur?.next = nil
+    
+    if let _ = tmpL1 {
+        if newL != nil {
+            newCur?.next = tmpL1
+            newCur = tmpL1
+        } else {
+            newL = tmpL1
+            newCur = tmpL1
+        }
+    }
+    if let _ = tmpL2 {
+        if newL != nil {
+            newCur?.next = tmpL2
+            newCur = tmpL2
+        } else {
+            newL = tmpL2
+            newCur = tmpL2
+        }
+    }
+    return newL
+}
+
+// 1->2->4, 1->3->4
+
+//var head = ListNode(1)
+//var head2 = ListNode(2)
+//var head4 = ListNode(4)
+//head.next = head2
+//head2.next = head4
+//
+//var headL = ListNode(1)
+//var headL2 = ListNode(3)
+//var headL4 = ListNode(4)
+//headL.next = headL2
+//headL2.next = headL4
+//
+//let newHead = mergeTwoLists(nil, headL)
+//debugPrint(newHead)
