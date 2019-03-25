@@ -1090,15 +1090,15 @@ func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
     }
 }
 
-//var head = ListNode(1)
-//var head1 = ListNode(2)
-//var head2 = ListNode(3)
-//var head3 = ListNode(4)
-//var head4 = ListNode(5)
-//head.next = head1
-//head1.next = head2
-//head2.next = head3
-//head3.next = head4
+var head = ListNode(1)
+var head1 = ListNode(2)
+var head2 = ListNode(3)
+var head3 = ListNode(4)
+var head4 = ListNode(5)
+head.next = head1
+head1.next = head2
+head2.next = head3
+head3.next = head4
 //
 //let newHead = removeNthFromEnd(head, 2)
 //debugPrint(newHead)
@@ -1144,4 +1144,44 @@ func removeElements(_ head: ListNode?, _ val: Int) -> ListNode? {
 }
 
 //let newHead = removeElements(head, 5)
+//debugPrint(newHead)
+
+// MARK: 328. 奇偶链表
+
+func oddEvenList(_ head: ListNode?) -> ListNode? {
+    var cur = head
+    var evenHead: ListNode?
+    var evenLast: ListNode?
+    var oddHead: ListNode?
+    var oddLast: ListNode?
+    var i = 1
+    
+    while cur != nil {
+        if i % 2 == 0 {
+            if oddHead == nil {
+                oddHead = cur
+                oddLast = cur
+            } else {
+                oddLast?.next = cur
+                oddLast = cur
+            }
+        } else {
+            if evenHead == nil {
+                evenHead = cur
+                evenLast = cur
+            } else {
+                evenLast?.next = cur
+                evenLast = cur
+            }
+        }
+        cur = cur?.next
+        i += 1
+    }
+    evenLast?.next = nil
+    oddLast?.next = nil
+    evenLast?.next = oddHead
+    return evenHead
+}
+
+//let newHead = oddEvenList(head)
 //debugPrint(newHead)
