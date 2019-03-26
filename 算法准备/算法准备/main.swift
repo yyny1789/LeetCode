@@ -1302,3 +1302,68 @@ func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
 //
 //let newHead = mergeTwoLists(nil, headL)
 //debugPrint(newHead)
+
+// MARK: 61. 旋转链表
+
+func rotateRight(_ head: ListNode?, _ k: Int) -> ListNode? {
+    if head == nil { return nil }
+    
+    var count = 0
+    var tmpHead = head
+    while tmpHead != nil {
+        tmpHead = tmpHead?.next
+        count += 1
+    }
+    
+    var fast = head
+    var fastIndex = 0
+    var slow = head
+    
+    while fastIndex < k % count {
+        fast = fast?.next
+        if fast == nil {
+            fast = head
+        }
+        fastIndex += 1
+    }
+    
+    while fast?.next != nil {
+        fast = fast?.next
+        slow = slow?.next
+    }
+    
+    let newHead = slow?.next
+    if newHead == nil {
+        return head
+    }
+    var newHeadLast = newHead
+    while newHeadLast?.next != nil {
+        newHeadLast = newHeadLast?.next
+    }
+    
+    slow?.next = nil
+    newHeadLast?.next = head
+    
+    return newHead
+}
+
+//var head = ListNode(1)
+//var head2 = ListNode(2)
+//var head3 = ListNode(3)
+//var head4 = ListNode(4)
+//var head5 = ListNode(5)
+//
+//head.next = head2
+//head2.next = head3
+//head3.next = head4
+//head4.next = head5
+
+//var headL = ListNode(1)
+//var headL2 = ListNode(3)
+//var headL4 = ListNode(4)
+//headL.next = headL2
+//headL2.next = headL4
+
+//let newHead = rotateRight(head, 7)
+//debugPrint(newHead)
+
