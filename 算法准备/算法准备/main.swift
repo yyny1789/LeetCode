@@ -1367,3 +1367,60 @@ func rotateRight(_ head: ListNode?, _ k: Int) -> ListNode? {
 //let newHead = rotateRight(head, 7)
 //debugPrint(newHead)
 
+// MARK: - 哈希表
+
+// MARK: 705. 设计哈希集合
+
+class MyHashSet {
+    
+    /** Initialize your data structure here. */
+    
+    var storeArr = [[Int]]()
+
+    init() {
+        for _ in 0...1000 {
+            let arr = [Int]()
+            self.storeArr.append(arr)
+        }
+    }
+    
+    func add(_ key: Int) {
+        let lastKey = key % 1000
+        var arr = storeArr[lastKey]
+        if !arr.contains(key) {
+            arr.append(key)
+        }
+        storeArr[lastKey] = arr
+    }
+    
+    func remove(_ key: Int) {
+        let lastKey = key % 1000
+        var arr = storeArr[lastKey]
+        
+        let index = arr.firstIndex(of: key)
+        if index != nil {
+            arr.remove(at: index!)
+            storeArr[lastKey] = arr
+        }
+    }
+    
+    /** Returns true if this set contains the specified element */
+    func contains(_ key: Int) -> Bool {
+        let lastKey = key % 1000
+        let arr = storeArr[lastKey]
+        
+        let index = arr.firstIndex(of: key)
+        return index != nil
+    }
+    
+}
+
+//let hashSet = MyHashSet()
+//hashSet.add(1)
+//hashSet.add(2)
+//debugPrint(hashSet.contains(1))     // 返回 true
+//debugPrint(hashSet.contains(3))      // 返回 false (未找到)
+//hashSet.add(2)
+//debugPrint(hashSet.contains(2))   // 返回 true
+//hashSet.remove(2)
+//debugPrint(hashSet.contains(2))     // 返回  false (已经被删除)
