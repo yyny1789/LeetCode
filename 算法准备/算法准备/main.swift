@@ -1522,3 +1522,21 @@ func containsDuplicate(_ nums: [Int]) -> Bool {
 }
 
 //debugPrint(containsDuplicate([1, 2, 3, 1]))
+
+// MARK: 136. 只出现一次的数字
+
+func singleNumber(_ nums: [Int]) -> Int {
+    var set = Set<Int>()
+    
+    for num in nums {
+        if set.contains(num) {
+            set.remove(num)
+        } else {
+            set.insert(num)
+        }
+    }
+    
+    return set.first ?? -1
+}
+
+//debugPrint(singleNumber([2,2,1]))
