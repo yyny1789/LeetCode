@@ -1424,3 +1424,86 @@ class MyHashSet {
 //debugPrint(hashSet.contains(2))   // 返回 true
 //hashSet.remove(2)
 //debugPrint(hashSet.contains(2))     // 返回  false (已经被删除)
+
+// MARK: 706. 设计哈希映射
+
+class MyHashMap {
+    
+    /** Initialize your data structure here. */
+    
+    var storeArr = [([Int], [Int])]()
+    
+    init() {
+        for _ in 0...1000 {
+            let arr = [Int]()
+            let arr2 = [Int]()
+            storeArr.append((arr, arr2))
+        }
+    }
+    
+    /** value will always be non-negative. */
+    func put(_ key: Int, _ value: Int) {
+        let lastKey = key % 1000
+        let arrs = storeArr[lastKey]
+        var keyArr = arrs.0
+        var valueArr = arrs.1
+        
+        if let index = keyArr.firstIndex(of: key) {
+            valueArr[index] = value
+        } else {
+            keyArr.append(key)
+            valueArr.append(value)
+        }
+        storeArr[lastKey] = (keyArr, valueArr)
+    }
+    
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    func get(_ key: Int) -> Int {
+        let lastKey = key % 1000
+        let arrs = storeArr[lastKey]
+        let keyArr = arrs.0
+        let valueArr = arrs.1
+        
+        if let index = keyArr.firstIndex(of: key) {
+            return valueArr[index]
+        } else {
+            return -1
+        }
+    }
+    
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    func remove(_ key: Int) {
+        let lastKey = key % 1000
+        let arrs = storeArr[lastKey]
+        var keyArr = arrs.0
+        var valueArr = arrs.1
+        
+        if let index = keyArr.firstIndex(of: key) {
+            keyArr.remove(at: index)
+            valueArr.remove(at: index)
+            storeArr[lastKey] = (keyArr, valueArr)
+        }
+    }
+}
+
+/*
+ MyHashMap hashMap = new MyHashMap();
+ hashMap.put(1, 1);
+ hashMap.put(2, 2);
+ hashMap.get(1);            // 返回 1
+ hashMap.get(3);            // 返回 -1 (未找到)
+ hashMap.put(2, 1);         // 更新已有的值
+ hashMap.get(2);            // 返回 1
+ hashMap.remove(2);         // 删除键为2的数据
+ hashMap.get(2);            // 返回 -1 (未找到)
+ */
+
+let hashMap = MyHashMap()
+hashMap.put(1, 1)
+hashMap.put(2, 2)
+debugPrint(hashMap.get(1)) // 1
+debugPrint(hashMap.get(3)) // -1
+hashMap.put(2, 1)
+debugPrint(hashMap.get(2)) // 1
+hashMap.remove(2)
+debugPrint(hashMap.get(2)) // -1
