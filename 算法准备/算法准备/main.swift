@@ -1540,3 +1540,21 @@ func singleNumber(_ nums: [Int]) -> Int {
 }
 
 //debugPrint(singleNumber([2,2,1]))
+
+// MARK: 349. 两个数组的交集
+
+func intersection(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+    var set = Set<Int>()
+    var arr = [Int]()
+    for num in nums1 {
+        set.insert(num)
+    }
+    for num in Set(nums2) {
+        if set.contains(num) {
+            arr.append(num)
+        }
+    }
+    return arr
+}
+
+//debugPrint(intersection([4,9,5], [9,4,9,8,4]))
