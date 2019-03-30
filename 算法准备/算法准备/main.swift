@@ -1498,12 +1498,27 @@ class MyHashMap {
  hashMap.get(2);            // 返回 -1 (未找到)
  */
 
-let hashMap = MyHashMap()
-hashMap.put(1, 1)
-hashMap.put(2, 2)
-debugPrint(hashMap.get(1)) // 1
-debugPrint(hashMap.get(3)) // -1
-hashMap.put(2, 1)
-debugPrint(hashMap.get(2)) // 1
-hashMap.remove(2)
-debugPrint(hashMap.get(2)) // -1
+//let hashMap = MyHashMap()
+//hashMap.put(1, 1)
+//hashMap.put(2, 2)
+//debugPrint(hashMap.get(1)) // 1
+//debugPrint(hashMap.get(3)) // -1
+//hashMap.put(2, 1)
+//debugPrint(hashMap.get(2)) // 1
+//hashMap.remove(2)
+//debugPrint(hashMap.get(2)) // -1
+
+// MARK: 217. 存在重复元素
+
+func containsDuplicate(_ nums: [Int]) -> Bool {
+    var set = Set<Int>()
+    
+    for num in nums {
+        if !set.insert(num).inserted {
+            return true
+        }
+    }
+    return false
+}
+
+//debugPrint(containsDuplicate([1, 2, 3, 1]))
