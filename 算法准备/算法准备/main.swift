@@ -1636,3 +1636,20 @@ func findRestaurant(_ list1: [String], _ list2: [String]) -> [String] {
 }
 
 //debugPrint(findRestaurant(["Shogun", "Tapioca Express", "Burger King", "KFC"], ["KFC", "Shogun", "Burger King"]))
+
+// MARK: 387. 字符串中的第一个唯一字符
+
+func firstUniqChar(_ s: String) -> Int {
+    var dic = [Character: Int]()
+    for char in s {
+        dic[char] = (dic[char] ?? 0) + 1
+    }
+    for (index, char) in s.enumerated() {
+        if let count = dic[char], count == 1 {
+            return index
+        }
+    }
+    return -1
+}
+
+//debugPrint(firstUniqChar("loveleetcode"))
