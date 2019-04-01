@@ -1558,3 +1558,33 @@ func intersection(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
 }
 
 //debugPrint(intersection([4,9,5], [9,4,9,8,4]))
+
+// MARK: ❤️ 202. 快乐数
+
+func isHappy(_ n: Int) -> Bool {
+    func calculateSum(_ n: Int) -> Int {
+        var sum = 0
+        for char in "\(n)" {
+            let value = (String(char) as NSString).integerValue
+            sum += value * value
+        }
+        return sum
+    }
+    var sum = n
+    var set = Set<Int>()
+    while true {
+        let next = calculateSum(sum)
+        if next == 1 {
+            return true
+        }
+        if set.contains(next) {
+            return false
+        }
+        set.insert(next)
+        sum = next
+    }
+}
+
+//debugPrint(isHappy(19))
+
+
