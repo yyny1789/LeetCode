@@ -1587,4 +1587,25 @@ func isHappy(_ n: Int) -> Bool {
 
 //debugPrint(isHappy(19))
 
+// MARK: ❤️ 205. 同构字符串
+
+// 对比下坐标
+func isIsomorphic(_ s: String, _ t: String) -> Bool {
+    guard s.count > 0, t.count > 0 else { return true }
+    var dicS = [Character: Int]()
+    var dicT = [Character: Int]()
+    
+    for i in 0..<s.count {
+        let charS = s[String.Index.init(encodedOffset: i)]
+        let charT = t[String.Index.init(encodedOffset: i)]
+        if dicS[charS] != dicT[charT] {
+            return false
+        }
+        dicS[charS] = i
+        dicT[charT] = i
+    }
+    return true
+}
+
+//debugPrint(isIsomorphic("ab", "aa"))
 
