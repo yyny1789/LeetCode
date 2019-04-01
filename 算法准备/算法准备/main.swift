@@ -1609,3 +1609,30 @@ func isIsomorphic(_ s: String, _ t: String) -> Bool {
 
 //debugPrint(isIsomorphic("ab", "aa"))
 
+// MARK: 599. 两个列表的最小索引总和
+
+func findRestaurant(_ list1: [String], _ list2: [String]) -> [String] {
+    var dic = [String: Int]()
+    var dic2 = [String: Int]()
+    for (index, str) in list2.enumerated() {
+        dic2[str] = index
+    }
+    var minCount = list1.count + list2.count
+    for (index, str1) in list1.enumerated() {
+        if let index2 = dic2[str1] {
+            let count = index + index2
+            dic[str1] = count
+            minCount = min(minCount, count)
+        }
+    }
+    
+    var array = [String]()
+    for (key, value) in dic {
+        if value == minCount {
+            array.append(key)
+        }
+    }
+    return array
+}
+
+//debugPrint(findRestaurant(["Shogun", "Tapioca Express", "Burger King", "KFC"], ["KFC", "Shogun", "Burger King"]))
