@@ -1653,3 +1653,23 @@ func firstUniqChar(_ s: String) -> Int {
 }
 
 //debugPrint(firstUniqChar("loveleetcode"))
+
+// MARK: 350. 两个数组的交集 II
+
+func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+    var dic = [Int: Int]()
+    for num in nums1 {
+        dic[num] = (dic[num] ?? 0) + 1
+    }
+    var array = [Int]()
+    for num in nums2 {
+        if var count = dic[num] {
+            array.append(num)
+            count -= 1
+            dic[num] = count > 0 ? count : nil
+        }
+    }
+    return array
+}
+
+//debugPrint(intersect([], [9,4,9,8,4]))
