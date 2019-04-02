@@ -1673,3 +1673,25 @@ func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
 }
 
 //debugPrint(intersect([], [9,4,9,8,4]))
+
+// MARK: 219. 存在重复元素 II
+
+func containsNearbyDuplicate(_ nums: [Int], _ k: Int) -> Bool {
+    var dic = [Int: [Int]]()
+    var i = k + 1
+    for (index, num) in nums.enumerated() {
+        if var arr = dic[num], !arr.isEmpty {
+            i = min(index - arr.last!, i)
+            arr.append(index)
+            dic[num] = arr
+        } else {
+            dic[num] = [index]
+        }
+    }
+    if i <= k {
+        return true
+    }
+    return false
+}
+
+//debugPrint(containsNearbyDuplicate([1,2,3,4,5,6,7,8,9,10], 15))
