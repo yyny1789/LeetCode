@@ -1695,3 +1695,31 @@ func containsNearbyDuplicate(_ nums: [Int], _ k: Int) -> Bool {
 }
 
 //debugPrint(containsNearbyDuplicate([1,2,3,4,5,6,7,8,9,10], 15))
+
+// MARK: 49. 字母异位词分组
+
+func groupAnagrams(_ strs: [String]) -> [[String]] {
+    func changeToKeyString(_ str: String) -> String {
+        var tmp = ""
+        for char in str.sorted() {
+            tmp.append(char)
+        }
+        return tmp
+    }
+    
+    var dic = [String: [String]]()
+    for str in strs {
+        let keyStr = changeToKeyString(str)
+        if var arr = dic[keyStr] {
+            arr.append(str)
+            dic[keyStr] = arr
+        } else {
+            dic[keyStr] = [str]
+        }
+    }
+    var array = [[String]]()
+    for arr in dic.values {
+        array.append(arr)
+    }
+    return array
+}
