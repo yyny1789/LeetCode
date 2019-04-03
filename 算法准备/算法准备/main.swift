@@ -1783,3 +1783,21 @@ func isValidSudoku(_ board: [[Character]]) -> Bool {
 //    [".",".",".","4","1","9",".",".","5"],
 //    [".",".",".",".","8",".",".","7","9"]
 //    ]))
+
+// MARK: 771. 宝石与石头
+
+func numJewelsInStones(_ J: String, _ S: String) -> Int {
+    var dic = [Character: Int]()
+    for char in S {
+        dic[char] = (dic[char] ?? 0) + 1
+    }
+    var count = 0
+    for char in J {
+        if let num = dic[char] {
+            count += num
+        }
+    }
+    return count
+}
+
+//debugPrint(numJewelsInStones("z", "ZZ"))
