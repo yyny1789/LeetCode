@@ -1825,3 +1825,27 @@ func lengthOfLongestSubstring(_ s: String) -> Int {
 }
 
 //debugPrint(lengthOfLongestSubstring("abcabcbb"))
+
+// MARK: 454. 四数相加 II
+
+func fourSumCount(_ A: [Int], _ B: [Int], _ C: [Int], _ D: [Int]) -> Int {
+    var dic = [Int: Int]()
+    for i in 0..<C.count {
+        for j in 0..<D.count {
+            let sum = C[i] + D[j]
+            dic[sum] = (dic[sum] ?? 0) + 1
+        }
+    }
+    var count = 0
+    for i in 0..<A.count {
+        for j in 0..<B.count {
+            let sum = A[i] + B[j]
+            if let c = dic[0 - sum] {
+                count += c
+            }
+        }
+    }
+    return count
+}
+
+//debugPrint(fourSumCount([0,1,-1], [-1,1,0], [0,0,1], [-1,1,1]))
