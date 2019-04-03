@@ -1849,3 +1849,40 @@ func fourSumCount(_ A: [Int], _ B: [Int], _ C: [Int], _ D: [Int]) -> Int {
 }
 
 //debugPrint(fourSumCount([0,1,-1], [-1,1,0], [0,0,1], [-1,1,1]))
+
+// MARK: ❤️ 347. 前K个高频元素
+
+func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
+    var dic = [Int: Int]()
+    for num in nums {
+        dic[num] = (dic[num] ?? 0) + 1
+    }
+    var dic2 = [Int: [Int]]()
+    for (num, count) in dic {
+        if var array = dic2[count] {
+            array.append(num)
+            dic2[count] = array
+        } else {
+            dic2[count] = [num]
+        }
+    }
+    
+    var set = Set<Int>()
+    let keys = dic2.keys.sorted().reversed()
+    for key in keys {
+        if let array = dic2[key] {
+            for num in array {
+                if set.count < k {
+                    set.insert(num)
+                } else {
+                    break
+                }
+            }
+        }
+    }
+    return Array(set)
+}
+
+// 解法2: 优先队列
+
+//debugPrint(topKFrequent([1], 1))
