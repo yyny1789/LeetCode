@@ -1723,3 +1723,63 @@ func groupAnagrams(_ strs: [String]) -> [[String]] {
     }
     return array
 }
+
+// MARK: 36. 有效的数独
+
+func isValidSudoku(_ board: [[Character]]) -> Bool {
+
+    func isValid(_ x: Int, _ y: Int, _ set: inout Set<Character>) -> Bool {
+        let char = board[x][y]
+        if char != "." {
+            if set.contains(char) {
+                return false
+            }
+            set.insert(char)
+        }
+        return true
+    }
+    for y in 0..<9 {
+        var set = Set<Character>()
+        for x in 0..<9 {
+            if !isValid(x, y, &set) {
+                return false
+            }
+        }
+    }
+    for x in 0..<9 {
+        var set = Set<Character>()
+        for y in 0..<9 {
+            if !isValid(x, y, &set) {
+                return false
+            }
+        }
+    }
+
+    let arrayX = [(0, 3), (3, 6), (6, 9)]
+    let arrayY = [(0, 3), (3, 6), (6, 9)]
+    for itemX in arrayX {
+        for itemY in arrayY {
+            var set = Set<Character>()
+            for x in itemX.0..<itemX.1 {
+                for y in itemY.0..<itemY.1 {
+                    if !isValid(x, y, &set) {
+                        return false
+                    }
+                }
+            }
+        }
+    }
+    return true
+}
+
+//debugPrint(isValidSudoku([
+//    ["9","3",".",".","7",".",".",".","."],
+//    ["6",".",".","1","9","5",".",".","."],
+//    [".","9","8",".",".",".",".","6","."],
+//    ["8",".",".",".","6",".",".",".","3"],
+//    ["4",".",".","8",".","3",".",".","1"],
+//    ["7",".",".",".","2",".",".",".","6"],
+//    [".","6",".",".",".",".","2","8","."],
+//    [".",".",".","4","1","9",".",".","5"],
+//    [".",".",".",".","8",".",".","7","9"]
+//    ]))
