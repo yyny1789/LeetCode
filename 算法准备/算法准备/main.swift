@@ -1801,3 +1801,27 @@ func numJewelsInStones(_ J: String, _ S: String) -> Int {
 }
 
 //debugPrint(numJewelsInStones("z", "ZZ"))
+
+// MARK: 3. 无重复字符的最长子串
+
+func lengthOfLongestSubstring(_ s: String) -> Int {
+    let array = Array(s)
+    var count = 0
+    var left = 0
+    var right = 0
+    var set = Set<Character>()
+    
+    while right < array.count {
+        if !set.contains(array[right]) {
+            set.insert(array[right])
+            right += 1
+            count = max(count, set.count)
+        } else {
+            set.remove(array[left])
+            left += 1
+        }
+    }
+    return count
+}
+
+//debugPrint(lengthOfLongestSubstring("abcabcbb"))
