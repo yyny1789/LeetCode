@@ -1886,3 +1886,52 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
 // 解法2: 优先队列
 
 //debugPrint(topKFrequent([1], 1))
+
+// MARK: 380. 常数时间插入、删除和获取随机元素
+
+class RandomizedSet {
+    
+    /** Initialize your data structure here. */
+    
+    var array = [Int]()
+    var dic = [Int: Int]()
+    
+    init() {
+        
+    }
+    
+    /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+    func insert(_ val: Int) -> Bool {
+        if let _ = dic[val] {
+            return false
+        }
+        array.append(val)
+        dic[val] = array.count - 1
+        return true
+    }
+    
+    /** Removes a value from the set. Returns true if the set contained the specified element. */
+    func remove(_ val: Int) -> Bool {
+        if let index = dic[val] {
+            array.remove(at: index)
+            dic.removeValue(forKey: val)
+            return true
+        }
+        return false
+    }
+    
+    /** Get a random element from the set. */
+    func getRandom() -> Int {
+        let index = Int(arc4random()) % array.count
+        return array[index]
+    }
+}
+
+//var set = RandomizedSet()
+//debugPrint(set.insert(1))
+//debugPrint(set.remove(2))
+//debugPrint(set.insert(2))
+//debugPrint(set.getRandom())
+//debugPrint(set.remove(1))
+//debugPrint(set.insert(2))
+//debugPrint(set.getRandom())
