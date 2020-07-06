@@ -8,84 +8,6 @@
 
 import Foundation
 
-func paixu(arr: [Int]) -> [Int] {
-    var tmpArr = [Int]()
-    
-    for item in arr {
-        if tmpArr.isEmpty {
-            tmpArr.append(item)
-        } else {
-            for(index, num) in tmpArr.enumerated() {
-                if item < num {
-                    if index == tmpArr.count - 1 {
-                        tmpArr.append(item)
-                        break
-                    }
-                } else if item >= num {
-                    tmpArr.insert(item, at: index)
-                    break
-                }
-            }
-        }
-    }
-    return tmpArr
-}
-
-let arr = [5, 3, 5, 2, 8]
-
-//debugPrint(paixu(arr: arr))
-
-// MARK: - 桶排序
-// 桶排序
-/*
- 浪费空间
- */
-func tongpaixu(_ arr: [Int]) -> [Int] {
-    var tmpArr = [Int]()
-    let count = 10
-    for _ in 0...count {
-        tmpArr.append(0)
-    }
-    
-    for item in arr {
-        let num = tmpArr[item]
-        tmpArr[item] = num + 1
-    }
-    
-    var tmpArr2 = [Int]()
-    for i in 0...count {
-        let num = tmpArr[count - i]
-        if num > 0 {
-            for _ in 0..<num {
-                tmpArr2.append(count - i)
-            }
-        }
-    }
-    return tmpArr2
-}
-
-//debugPrint(tongpaixu(arr))
-
-// MARK: - 冒泡排序
-// 冒泡排序的基本思想：每次比较两个相邻的元素，如果它们的顺序错误就把它们交换过来。
-func maopaopaixu(_ arr: [Int]) -> [Int] {
-    var tmpArr = arr
-    for j in 0..<arr.count {
-        for i in 0..<arr.count - j {
-            if i + 1 < arr.count - j {
-                if tmpArr[i] < tmpArr[i + 1] {
-                    let tmp = tmpArr[i + 1]
-                    tmpArr[i + 1] = tmpArr[i]
-                    tmpArr[i] = tmp
-                }
-            }
-        }
-    }
-    return tmpArr
-}
-
-//debugPrint(maopaopaixu(arr))
-
 // 链表两数之和
 
 public class ListNode {
@@ -145,17 +67,134 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
 }
 
 // MARK: - 数组
+
+func paixu(arr: [Int]) -> [Int] {
+    var tmpArr = [Int]()
+    
+    for item in arr {
+        if tmpArr.isEmpty {
+            tmpArr.append(item)
+        } else {
+            for(index, num) in tmpArr.enumerated() {
+                if item < num {
+                    if index == tmpArr.count - 1 {
+                        tmpArr.append(item)
+                        break
+                    }
+                } else if item >= num {
+                    tmpArr.insert(item, at: index)
+                    break
+                }
+            }
+        }
+    }
+    return tmpArr
+}
+
+let arr = [5, 3, 5, 2, 8]
+//debugPrint(paixu(arr: arr))
+
+// MARK: 桶排序
+// 桶排序
+/*
+ 浪费空间
+ */
+func tongpaixu(_ arr: [Int]) -> [Int] {
+    var tmpArr = [Int]()
+    let count = 10
+    for _ in 0...count {
+        tmpArr.append(0)
+    }
+    
+    for item in arr {
+        let num = tmpArr[item]
+        tmpArr[item] = num + 1
+    }
+    
+    var tmpArr2 = [Int]()
+    for i in 0...count {
+        let num = tmpArr[count - i]
+        if num > 0 {
+            for _ in 0..<num {
+                tmpArr2.append(count - i)
+            }
+        }
+    }
+    return tmpArr2
+}
+
+//debugPrint(tongpaixu(arr))
+
+// MARK: 冒泡排序
+// 冒泡排序的基本思想：每次比较两个相邻的元素，如果它们的顺序错误就把它们交换过来。
+func maopaopaixu(_ arr: [Int]) -> [Int] {
+    var resultArr = arr
+    
+    for i in 1..<resultArr.count {
+        for j in 0..<resultArr.count - i {
+            if resultArr[j] > resultArr[j + 1] {
+                let tmp = resultArr[j]
+                resultArr[j] = resultArr[j + 1]
+                resultArr[j + 1] = tmp
+            }
+        }
+    }
+    return resultArr
+}
+
+// MARK: 选择排序
+/*
+ 首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置
+
+ 再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。
+
+ 重复第二步，直到所有元素均排序完毕。
+ */
+func xuanzepaixu(_ arr: [Int]) -> [Int] {
+    var resultArr = arr
+    
+    for i in 0..<resultArr.count - 1 {
+        var min = i
+        for j in i..<resultArr.count {
+            if resultArr[j] < resultArr[min] {
+                min = j
+            }
+        }
+        let tmp = resultArr[i]
+        resultArr[i] = resultArr[min]
+        resultArr[min] = tmp
+    }
+    return resultArr
+}
+
+// MARK: 插入排序
+/*
+ 将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。
+ 从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）
+ */
+func charupaixu(_ arr: [Int]) -> [Int] {
+    var resultArr = arr
+    
+    for i in 1..<resultArr.count {
+        var j = i
+        
+        while j > 0 {
+            if resultArr[j] < resultArr[j - 1] {
+                let tmp = resultArr[j - 1]
+                resultArr[j - 1] = resultArr[j]
+                resultArr[j] = tmp
+                j -= 1
+            } else {
+                break
+            }
+        }
+    }
+    return resultArr
+}
+
+debugPrint(charupaixu(arr))
+
 // MARK:  977.有序数组的平方
-
-//func sortedSquares(_ A: [Int]) -> [Int] {
-//    var arr = [Int]()
-//    for i in 0..<A.count {
-//        arr.append(A[i] * A[i])
-//    }
-//    arr.sort()
-//    return arr
-//}
-
 func sortedSquares(_ A: [Int]) -> [Int] {
     var arr = [Int]()
     var j = 0
