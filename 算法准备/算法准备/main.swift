@@ -91,7 +91,7 @@ func paixu(arr: [Int]) -> [Int] {
     return tmpArr
 }
 
-let arr = [5, 3, 5, 2, 8]
+var arr = [5, 3, 5, 2, 8]
 //debugPrint(paixu(arr: arr))
 
 // MARK: 桶排序
@@ -192,7 +192,32 @@ func charupaixu(_ arr: [Int]) -> [Int] {
     return resultArr
 }
 
-debugPrint(charupaixu(arr))
+// MARK: 快速排序
+func quickSort(_ arr: inout [Int], low: Int, high: Int) {
+    guard low < high else {
+        return
+    }
+    var i = low
+    var j = high
+    let key = arr[i]
+    
+    while i < j {
+        while i < j && arr[j] >= key {
+            j -= 1
+        }
+        arr[i] = arr[j]
+        while i < j && arr[i] <= key {
+            i += 1
+        }
+        arr[j] = arr[i]
+    }
+    arr[i] = key
+    quickSort(&arr, low: low, high: i - 1)
+    quickSort(&arr, low: i + 1, high: high)
+}
+
+//quickSort(&arr, low: 0, high: arr.count - 1)
+//debugPrint(arr)
 
 // MARK:  977.有序数组的平方
 func sortedSquares(_ A: [Int]) -> [Int] {
